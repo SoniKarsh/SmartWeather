@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "613930411264",
+    "project_id": "smartweather-ef09d",
+    "storage_bucket": "smartweather-ef09d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613930411264:android:f738d12065805b7d15bfe5",
+        "android_client_info": {
+          "package_name": "com.technobugsai.smartweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613930411264-8a3v7q4pg1hg800fk3q6vn7eif22c6bc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcaPjClygL1Lx0L8Ji3bjstglbCA_WXu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613930411264-8a3v7q4pg1hg800fk3q6vn7eif22c6bc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

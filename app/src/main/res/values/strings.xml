@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">SmartWeather</string>
+    <string name="no_photos_found">No photos found</string>
+    <string name="retry">Retry</string>
+
+    <string name="menu_ui_mode">Dark Mode</string>
+
+    <string name="hash_id">#%s</string>
+    <string name="cta_login">Login</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_signup">Signup</string>
+    <string name="or">Or</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_a_short_bio">A short bio</string>
+    <string name="title_upload_profile_picture">Upload profile picture</string>
+    <string name="cta_take_photo">Take photo</string>
+    <string name="cta_take_from_library">Take from library</string>
+
+    <!--  Error  -->
+    <string name="error_empty_email">The email can\'t be empty</string>
+    <string name="error_empty_password">The password can\'t be empty</string>
+    <string name="error_not_valid_email">The email isn\'t valid</string>
+    <string name="error_not_valid_password">
+        Password must contain at least 6 characters, one uppercase, one lowercase letter with a digit and special symbol
+    </string>
+</resources>
