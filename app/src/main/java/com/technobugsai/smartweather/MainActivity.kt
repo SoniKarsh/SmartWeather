@@ -11,10 +11,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavHost
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.NavHostFragment
 import com.technobugsai.smartweather.appview.auth.AuthFragment
 import com.technobugsai.smartweather.appview.auth.AuthFragmentDirections
+import com.technobugsai.smartweather.appview.auth.SignUpFragment
 import com.technobugsai.smartweather.appview.profile.UserProfileFragment
 import com.technobugsai.smartweather.appview.viewmodel.AuthViewModel
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
@@ -83,6 +86,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val menuItem = menu?.findItem(R.id.menu_more)
+        (supportFragmentManager.fragments[0] as? NavHostFragment)?.run {
+            if(childFragmentManager.fragments[0] is AuthFragment){
+                menuItem?.isVisible = false
+            } else if (childFragmentManager.fragments[0] is SignUpFragment) {
+                menuItem?.isVisible = false
+            }
+        }
         return true
     }
 
