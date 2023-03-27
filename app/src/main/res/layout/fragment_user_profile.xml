@@ -29,6 +29,19 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="@dimen/_330dp"
+        android:indeterminateTint="@color/primary_hint"
+        android:indeterminate="true"
+        app:layout_constraintStart_toStartOf="@id/ivImageDisplay"
+        app:layout_constraintTop_toTopOf="@id/ivImageDisplay"
+        app:layout_constraintEnd_toEndOf="@id/ivImageDisplay"
+        app:layout_constraintBottom_toBottomOf="@id/ivImageDisplay"
+        />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvUserName"
         android:layout_width="match_parent"

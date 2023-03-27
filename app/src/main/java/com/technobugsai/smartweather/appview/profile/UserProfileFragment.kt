@@ -1,5 +1,6 @@
 package com.technobugsai.smartweather.appview.profile
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.technobugsai.smartweather.MainActivity
 import com.technobugsai.smartweather.appview.profile.adapter.WeatherListAdapter
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
@@ -117,7 +123,34 @@ class UserProfileFragment: Fragment() {
                         Glide.with(requireContext())
                             .load(it.userProfile)
                             .apply(RequestOptions()
-                                .circleCrop())
+                                .circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL))
+                            .listener(object : RequestListener<Drawable> {
+                                override fun onLoadFailed(
+                                    e: GlideException?,
+                                    model: Any?,
+                                    target: Target<Drawable>?,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    // Handle the image loading failure here
+                                    // Return false to allow Glide to call the error placeholder.
+                                    progressBar.visibility = View.GONE
+                                    return false
+                                }
+
+                                override fun onResourceReady(
+                                    resource: Drawable?,
+                                    model: Any?,
+                                    target: Target<Drawable>?,
+                                    dataSource: DataSource?,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    // Handle the image loading success here
+                                    // Return true to prevent Glide from calling the error placeholder.
+                                    progressBar.visibility = View.GONE
+                                    ivImageDisplay.setImageDrawable(resource)
+                                    return true
+                                }
+                            })
                             .into(ivImageDisplay)
                     }
                 }
