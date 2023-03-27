@@ -45,7 +45,7 @@ class AuthFragment: Fragment() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 (requireActivity() as MainActivity).showHideProgress(false)
-                findNavController().navigateUp()
+                requireActivity().finish()
             }
         }
 

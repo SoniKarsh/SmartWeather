@@ -46,18 +46,6 @@ class UserProfileFragment: Fragment() {
         setClickListeners()
         observeWeatherModel()
         setBackArrow()
-        handleBack()
-    }
-
-    private fun handleBack() {
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                (requireActivity() as MainActivity).showHideProgress(false)
-                findNavController().navigateUp()
-            }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setBackArrow() {
