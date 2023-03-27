@@ -3,6 +3,7 @@ package com.technobugsai.smartweather.appview.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
@@ -11,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.technobugsai.smartweather.db.DbConstants
 import com.technobugsai.smartweather.db.SharedPreferenceDataStore
@@ -133,6 +135,20 @@ class AuthViewModel(private val application: Application,
         }
     }
 
+    private suspend fun uploadProfile(metadata: StorageMetadata, storeReference: StorageReference?, profile: UserProfileModel): UploadTask? {
+        val task = storeReference?.putBytes(AppUtils.getBytes(profile.userProfile ?: ""), metadata)
+        task?.await()
+        return task
+    }
+
+    private suspend fun uploadUserData(profile: UserProfileModel): Task<Void>? {
+        val task = firebaseFireStore?.collection(DbConstants.DB_USER)
+            ?.document(profile.id ?: "")
+            ?.set(profile)
+        task?.await()
+        return task
+    }
+
     private fun signUp(profile: UserProfileModel): Flow<Resource<AuthResult>> = flow {
         emit(Resource.Loading())
         try {
@@ -146,29 +162,33 @@ class AuthViewModel(private val application: Application,
                 ?.child(DbConstants.USER_IMAGE)
                 ?.child(result.user?.uid ?: "")
                 ?.child(DbConstants.DEFAULT_IMG_PATH)
-            val task = imageRef?.putBytes(AppUtils.getBytes(profile.userProfile ?: ""), storeMetadata)
-            task?.addOnSuccessListener {
-                if (task.isSuccessful) {
-                    imageRef.downloadUrl.addOnSuccessListener { uri ->
-                        profile.userProfile = uri.toString()
-                        profile.id = result.user?.uid ?: ""
-                        firebaseFireStore?.collection(DbConstants.DB_USER)
-                            ?.document(profile.id ?: "")
-                            ?.set(profile)
-                            ?.addOnSuccessListener {
-                                viewModelScope.launch {
-                                    dataStore.putString(DbConstants.USER_ID, result.user?.uid ?: "")
-                                    emit(Resource.Success(result))
-                                }
-                            }?.addOnFailureListener {
-                                viewModelScope.launch {
-                                    emit(Resource.Error(error = it.message ?: it.localizedMessage ?: application.getString(R.string.error_something_went_wrong)))
-                                }
-                            }
+            val uploadTask = uploadProfile(storeMetadata, imageRef, profile)
+            if (uploadTask?.isSuccessful == true) {
+                val downTask = imageRef?.downloadUrl
+                downTask?.await()
+                if (downTask?.isSuccessful == true) {
+                    profile.userProfile = downTask.result.toString()
+                    profile.id = result.user?.uid ?: ""
+                    val userTask = uploadUserData(profile)
+                    if (userTask?.isSuccessful == true) {
+                        dataStore.putString(
+                            DbConstants.USER_ID,
+                            result.user?.uid ?: ""
+                        )
+                        dataStore.putString(DbConstants.USER_PROFILE, profile.toJson())
+                        emit(Resource.Success(result))
+                    } else {
+                        userTask?.exception?.let {
+                            emit(Resource.Error(error = it.message ?: it.localizedMessage ?: application.getString(R.string.error_something_went_wrong)))
+                        }
+                    }
+                } else {
+                    downTask?.exception?.let {
+                        emit(Resource.Error(error = it.message ?: it.localizedMessage ?: application.getString(R.string.error_something_went_wrong)))
                     }
                 }
-            }?.addOnFailureListener{
-                viewModelScope.launch {
+            } else {
+                uploadTask?.exception?.let {
                     emit(Resource.Error(error = it.message ?: it.localizedMessage ?: application.getString(R.string.error_something_went_wrong)))
                 }
             }

@@ -4,20 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.technobugsai.smartweather.MainActivity
 import com.technobugsai.smartweather.R
+import com.technobugsai.smartweather.appview.profile.adapter.WeatherListAdapter
 import com.technobugsai.smartweather.appview.search.adapter.CityListAdapter
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
 import com.technobugsai.smartweather.databinding.FragmentSearchBinding
 import com.technobugsai.smartweather.model.weather.ResCityModel
-import com.technobugsai.smartweather.utils.AppUtils
 import com.technobugsai.smartweather.utils.AppUtils.toList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -40,6 +43,14 @@ class SearchCityFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        setBackArrow()
+    }
+
+    private fun setBackArrow(){
+        (requireActivity() as AppCompatActivity).run {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+        }
     }
 
     private fun readFromJsonRaw(): String {
@@ -62,21 +73,31 @@ class SearchCityFragment: Fragment() {
         }
     }
 
+    private suspend fun getListOfCities(): List<ResCityModel> {
+        return readFromJsonRaw().toList<ResCityModel>() ?: arrayListOf()
+    }
+
     private fun initAdapter(){
         showHidePb(true)
-        lifecycleScope.launch(Dispatchers.Main) {
-            if (::cityListAdapter.isInitialized.not()) {
-                cityListAdapter = CityListAdapter(readFromJsonRaw().toList<ResCityModel>() ?: arrayListOf()) { model ->
-                    binding.searchView.setQuery(model.name, false)
-                    viewModel.selectedModel.tryEmit(model)
-                    findNavController().popBackStack()
+        lifecycleScope.launch(Dispatchers.IO) {
+            var cities = arrayListOf<ResCityModel>()
+            runBlocking {
+                cities = getListOfCities() as ArrayList<ResCityModel>
+            }
+            withContext(Dispatchers.Main) {
+                if (::cityListAdapter.isInitialized.not()) {
+                    cityListAdapter = CityListAdapter(cities) { model ->
+                        binding.searchView.setQuery(model.name, false)
+                        viewModel.selectedModel.tryEmit(model)
+                        findNavController().popBackStack()
+                    }
                 }
+                binding.rvSearchResult.run {
+                    adapter = cityListAdapter
+                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                }
+                showHidePb(false)
             }
-            binding.rvSearchResult.run {
-                adapter = cityListAdapter
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            }
-            showHidePb(false)
         }
         binding.searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

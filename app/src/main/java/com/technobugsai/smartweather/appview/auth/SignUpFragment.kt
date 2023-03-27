@@ -51,6 +51,17 @@ class SignUpFragment: Fragment() {
         observeErrors()
         observeProgress()
         showSnackBar()
+        observeLogin()
+    }
+
+    private fun observeLogin() {
+        lifecycleScope.launch {
+            viewModel.logInSuccess.collectLatest {
+                if (it) {
+                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToUserProfileFragment())
+                }
+            }
+        }
     }
 
     private fun showSnackBar() {

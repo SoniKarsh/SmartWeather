@@ -34,6 +34,12 @@
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_signUpFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -42,9 +48,16 @@
         <action
             android:id="@+id/action_userProfileFragment_to_searchCityFragment"
             app:destination="@id/searchCityFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_weatherDetailsFragment"
+            app:destination="@id/weatherDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
         android:name="com.technobugsai.smartweather.appview.search.SearchCityFragment"
         android:label="SearchCityFragment" />
+    <fragment
+        android:id="@+id/weatherDetailsFragment"
+        android:name="com.technobugsai.smartweather.appview.details.WeatherDetailsFragment"
+        android:label="WeatherDetailsFragment" />
 </navigation>

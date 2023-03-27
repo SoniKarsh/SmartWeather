@@ -1,7 +1,7 @@
 package com.technobugsai.smartweather.modules.network
 
-import com.fitpeo.task.api.ApiConstants
-import com.technobugsai.smartweather.api.interfaces.FitPeoPhotosApi
+import com.technobugsai.smartweather.api.ApiConstants
+import com.technobugsai.smartweather.api.interfaces.WeatherApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -13,7 +13,7 @@ val apiModule = module {
         provideOkHttpClient()
     }
     single {
-        providePhotosApi(get())
+        provideWeatherApi(get())
     }
     single {
         provideRetrofit(get())
@@ -34,4 +34,4 @@ fun provideOkHttpClient(): OkHttpClient {
         .build()
 }
 
-fun providePhotosApi(retrofit: Retrofit): FitPeoPhotosApi = retrofit.create(FitPeoPhotosApi::class.java)
+fun provideWeatherApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)

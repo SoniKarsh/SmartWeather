@@ -34,4 +34,14 @@
     <string name="menu_more">More</string>
     <string name="cta_log_out">Log out</string>
     <string name="enter_a_city_name">Enter a city name</string>
+    <string name="tv_date">Date:</string>
+    <string name="tv_time">Time:</string>
+    <string name="tv_humidity">Humidity:</string>
+    <string name="tv_temp">Temp:</string>
+    <string name="temp_val">Temp:</string>
+    <string name="humidity_val">%1$s%%</string>
+    <string name="temperature_val">%1$s°C</string>
+    <string name="tv_wind">Wind:</string>
+    <string name="tv_main_title">Main title:</string>
+    <string name="tv_description">Description:</string>
 </resources>

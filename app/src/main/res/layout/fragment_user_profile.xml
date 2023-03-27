@@ -83,7 +83,16 @@
             android:drawableEnd="@drawable/ic_search"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/primary_hint"
-            android:text="Ahmedabad"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cityName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_10dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ val activityModule = module {
         UserProfileViewModel(
             get(),
             get(),
+            get(),
             get()
         )
     }
