@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -35,6 +36,24 @@ class UserProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeUser()
+        observeCityModel()
+        setClickListeners()
+    }
+
+    private fun observeCityModel() {
+        lifecycleScope.launch {
+            viewModel.selectedModel.collectLatest {
+                it?.run {
+
+                }
+            }
+        }
+    }
+
+    private fun setClickListeners(){
+        binding.cityName.setOnClickListener {
+            findNavController().navigate(UserProfileFragmentDirections.actionUserProfileFragmentToSearchCityFragment())
+        }
     }
 
     private fun observeUser() {

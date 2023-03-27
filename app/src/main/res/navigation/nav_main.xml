@@ -38,5 +38,13 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.technobugsai.smartweather.appview.profile.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchCityFragment"
+        android:name="com.technobugsai.smartweather.appview.search.SearchCityFragment"
+        android:label="SearchCityFragment" />
 </navigation>

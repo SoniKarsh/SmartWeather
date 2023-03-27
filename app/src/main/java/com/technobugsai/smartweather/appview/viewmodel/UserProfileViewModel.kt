@@ -13,6 +13,7 @@ import com.google.firebase.storage.ktx.storage
 import com.technobugsai.smartweather.db.DbConstants
 import com.technobugsai.smartweather.db.SharedPreferenceDataStore
 import com.technobugsai.smartweather.model.UserProfileModel
+import com.technobugsai.smartweather.model.weather.ResCityModel
 import com.technobugsai.smartweather.utils.AppUtils
 import com.technobugsai.smartweather.utils.AppUtils.toObject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +30,7 @@ class UserProfileViewModel(
     private var firebaseStorage: FirebaseStorage? = null
     private var firebaseFireStore: FirebaseFirestore? = null
     private var storageRef: StorageReference? = null
+    var selectedModel = MutableStateFlow<ResCityModel?>(null)
 
     init {
         firebaseStorage = Firebase.storage

@@ -10,6 +10,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
@@ -78,6 +79,15 @@ object AppUtils {
     inline fun <reified T> String.toObject(): T? {
         return try {
             Gson().fromJson(this, T::class.java)
+        } catch (e: JsonSyntaxException) {
+            null
+        }
+    }
+
+    inline fun <reified T> String.toList(): List<T>? {
+        return try {
+            val listType = object : TypeToken<List<T>>() {}.type
+            return Gson().fromJson(this, listType)
         } catch (e: JsonSyntaxException) {
             null
         }
