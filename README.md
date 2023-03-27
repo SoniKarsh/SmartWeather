@@ -37,15 +37,15 @@ demo to showcase skills though can agree that there are many areas where I could
 - Navigation graph
 
 ## Implementations <a name = "implementations"></a>
-<a href="https://ibb.co/Hr2Bhc5"><img width=350px height=500px src="https://i.ibb.co/Wc3GVrm/Screenshot-2023-03-27-19-44-31-095-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-44-31-095-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/njvny4v"><img width=350px height=500px src="https://i.ibb.co/DQy8Fmy/Screenshot-2023-03-27-19-44-35-167-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-44-35-167-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/d6f6Rd7"><img width=350px height=500px src="https://i.ibb.co/P4r4d7t/Screenshot-2023-03-27-19-45-48-728-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-45-48-728-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/JHm43xB"><img width=350px height=500px src="https://i.ibb.co/7Kj5kgY/Screenshot-2023-03-27-19-45-53-489-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-45-53-489-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/2nqBKCj"><img width=350px height=500px src="https://i.ibb.co/Fx6t7yB/Screenshot-2023-03-27-19-46-56-041-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-46-56-041-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/yB8Drwf"><img width=350px height=500px src="https://i.ibb.co/BKgm9Xz/Screenshot-2023-03-27-19-48-27-978-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-27-978-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/SyW6LsG"><img width=350px height=500px src="https://i.ibb.co/7C8S9YL/Screenshot-2023-03-27-19-48-31-767-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-31-767-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/dGPN5v6"><img width=350px height=500px src="https://i.ibb.co/nz7XLyf/Screenshot-2023-03-27-19-48-41-154-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-41-154-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/C6Gc5Jq"><img width=350px height=500px src="https://i.ibb.co/KDvPjNY/Screenshot-2023-03-27-19-48-49-467-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-49-467-com-technobugsai-smartweather" border="0"></a>
-<a href="https://ibb.co/1n8pdHy"><img width=350px height=500px src="https://i.ibb.co/rt4Lcn8/Screenshot-2023-03-27-19-49-07-628-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-49-07-628-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/Hr2Bhc5"><img width=350px height=700px src="https://i.ibb.co/Wc3GVrm/Screenshot-2023-03-27-19-44-31-095-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-44-31-095-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/njvny4v"><img width=350px height=700px src="https://i.ibb.co/DQy8Fmy/Screenshot-2023-03-27-19-44-35-167-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-44-35-167-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/d6f6Rd7"><img width=350px height=700px src="https://i.ibb.co/P4r4d7t/Screenshot-2023-03-27-19-45-48-728-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-45-48-728-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/JHm43xB"><img width=350px height=700px src="https://i.ibb.co/7Kj5kgY/Screenshot-2023-03-27-19-45-53-489-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-45-53-489-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/2nqBKCj"><img width=350px height=700px src="https://i.ibb.co/Fx6t7yB/Screenshot-2023-03-27-19-46-56-041-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-46-56-041-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/yB8Drwf"><img width=350px height=700px src="https://i.ibb.co/BKgm9Xz/Screenshot-2023-03-27-19-48-27-978-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-27-978-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/SyW6LsG"><img width=350px height=700px src="https://i.ibb.co/7C8S9YL/Screenshot-2023-03-27-19-48-31-767-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-31-767-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/dGPN5v6"><img width=350px height=700px src="https://i.ibb.co/nz7XLyf/Screenshot-2023-03-27-19-48-41-154-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-41-154-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/C6Gc5Jq"><img width=350px height=700px src="https://i.ibb.co/KDvPjNY/Screenshot-2023-03-27-19-48-49-467-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-48-49-467-com-technobugsai-smartweather" border="0"></a>
+<a href="https://ibb.co/1n8pdHy"><img width=350px height=700px src="https://i.ibb.co/rt4Lcn8/Screenshot-2023-03-27-19-49-07-628-com-technobugsai-smartweather.jpg" alt="Screenshot-2023-03-27-19-49-07-628-com-technobugsai-smartweather" border="0"></a>
 
 
