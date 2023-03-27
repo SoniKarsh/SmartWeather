@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.technobugsai.smartweather.MainActivity
 import com.technobugsai.smartweather.R
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
 import com.technobugsai.smartweather.databinding.FragmentWeatherDetailsBinding
@@ -34,6 +37,18 @@ class WeatherDetailsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeWeatherItem()
         setBackArrow()
+        handleBack()
+    }
+
+    private fun handleBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (requireActivity() as MainActivity).showHideProgress(false)
+                findNavController().navigateUp()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setBackArrow(){

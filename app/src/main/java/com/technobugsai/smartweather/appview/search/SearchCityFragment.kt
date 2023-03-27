@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import com.technobugsai.smartweather.appview.search.adapter.CityListAdapter
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
 import com.technobugsai.smartweather.databinding.FragmentSearchBinding
 import com.technobugsai.smartweather.model.weather.ResCityModel
+import com.technobugsai.smartweather.utils.AppLogger
 import com.technobugsai.smartweather.utils.AppUtils.toList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +46,18 @@ class SearchCityFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         setBackArrow()
+        handleBack()
+    }
+
+    private fun handleBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showHidePb(false)
+                findNavController().navigateUp()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setBackArrow(){
@@ -64,13 +78,7 @@ class SearchCityFragment: Fragment() {
     }
 
     private fun showHidePb(shouldShow: Boolean){
-        (requireActivity() as MainActivity).run {
-            if (shouldShow) {
-                showHideProgress(true)
-            } else {
-                showHideProgress(false)
-            }
-        }
+        (requireActivity() as MainActivity).showHideProgress(shouldShow)
     }
 
     private suspend fun getListOfCities(): List<ResCityModel> {

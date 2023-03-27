@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.technobugsai.smartweather.MainActivity
 import com.technobugsai.smartweather.appview.profile.adapter.WeatherListAdapter
 import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
 import com.technobugsai.smartweather.databinding.FragmentUserProfileBinding
@@ -44,6 +46,18 @@ class UserProfileFragment: Fragment() {
         setClickListeners()
         observeWeatherModel()
         setBackArrow()
+        handleBack()
+    }
+
+    private fun handleBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (requireActivity() as MainActivity).showHideProgress(false)
+                findNavController().navigateUp()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setBackArrow() {
