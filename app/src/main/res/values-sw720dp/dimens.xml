@@ -226,6 +226,7 @@
     <dimen name="_250dp">375.0dp</dimen>
     <dimen name="_320dp">480.0dp</dimen>
     <dimen name="_330dp">495.0dp</dimen>
-
+    <dimen name="_300dp">450dp</dimen>
+    <dimen name="_225dp">337.5dp</dimen>
 
 </resources>

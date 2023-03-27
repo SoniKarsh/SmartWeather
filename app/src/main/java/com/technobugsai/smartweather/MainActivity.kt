@@ -1,13 +1,22 @@
 package com.technobugsai.smartweather
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigator
+import com.technobugsai.smartweather.appview.auth.AuthFragment
+import com.technobugsai.smartweather.appview.auth.AuthFragmentDirections
+import com.technobugsai.smartweather.appview.profile.UserProfileFragment
 import com.technobugsai.smartweather.appview.viewmodel.AuthViewModel
+import com.technobugsai.smartweather.appview.viewmodel.UserProfileViewModel
 import com.technobugsai.smartweather.databinding.ActivityMainBinding
 import com.technobugsai.smartweather.utils.applyTheme
 import com.technobugsai.smartweather.utils.isDarkTheme
@@ -18,12 +27,23 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AuthViewModel by viewModel()
+    private val userViewModel: UserProfileViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                false
-//                viewModel.isLoading.value
+                viewModel.isLoading.value
+            }
+            setOnExitAnimationListener {
+                findNavController(binding.fcvMain.id).run {
+                    if (viewModel.toAuth.not()
+                        && (currentDestination as? FragmentNavigator.Destination)?.className == AuthFragment::class.qualifiedName) {
+                        findNavController(binding.fcvMain.id).navigate(
+                            AuthFragmentDirections.actionAuthFragmentToUserProfileFragment()
+                        )
+                    }
+                }
+                it.remove()
             }
         }
         super.onCreate(savedInstanceState)
@@ -72,8 +92,39 @@ class MainActivity : AppCompatActivity() {
                 applyTheme(uiMode)
                 true
             }
+            R.id.menu_more -> {
+                val popupMenu = PopupMenu(this, binding.toolbar.findViewById(R.id.menu_more))
+                popupMenu.inflate(R.menu.overflow_menu)
+                popupMenu.setOnMenuItemClickListener { popupMenuItem ->
+                    // Handle menu item clicks here
+                    when (popupMenuItem.itemId) {
+                        R.id.menu_log_out -> {
+                            lifecycleScope.launch {
+                                viewModel.clearDb()
+                                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                                finish()
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                    true
+                }
+                popupMenu.show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
     }
+
+    fun showHideProgress(shouldShow: Boolean) {
+        if (shouldShow) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.layer.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.layer.visibility = View.GONE
+        }
+    }
+
 }

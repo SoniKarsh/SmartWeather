@@ -46,4 +46,45 @@ object ValidationUtils {
         )
     }
 
+    fun isUserNameValid(uName: String): ValidationResult {
+        if (uName.isBlank()) {
+            return ValidationResult(
+                successful = false,
+                errorId = R.string.error_empty_user_name
+            )
+        }
+        return ValidationResult(
+            successful = true
+        )
+    }
+
+    fun isBioValid(bio: String): ValidationResult {
+        if (bio.isBlank()) {
+            return ValidationResult(
+                successful = false,
+                errorId = R.string.error_empty_bio
+            )
+        }
+        return ValidationResult(
+            successful = true
+        )
+    }
+
+    fun isConfirmPasswordValid(password: String, confirm: String): ValidationResult {
+        if (confirm.isBlank()) {
+            return ValidationResult(
+                successful = false,
+                errorId = R.string.error_empty_confirm_password
+            )
+        } else if (confirm != password) {
+            return ValidationResult(
+                successful = false,
+                errorId = R.string.error_not_valid_confirm_password
+            )
+        }
+        return ValidationResult(
+            successful = true
+        )
+    }
+
 }

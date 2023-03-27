@@ -26,6 +26,7 @@
             android:layout_marginVertical="@dimen/_10dp"
             android:hint="@string/hint_email"
             android:nextFocusDown="@id/etPassword"
+            app:errorIconDrawable="@null"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -51,6 +52,8 @@
             android:layout_marginHorizontal="@dimen/_20dp"
             android:layout_marginVertical="@dimen/_10dp"
             android:hint="@string/hint_password"
+            app:passwordToggleEnabled="true"
+            app:errorIconDrawable="@null"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -74,6 +77,8 @@
             android:layout_marginHorizontal="@dimen/_20dp"
             android:layout_marginVertical="@dimen/_10dp"
             android:hint="@string/hint_confirm_password"
+            app:passwordToggleEnabled="true"
+            app:errorIconDrawable="@null"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -97,6 +102,7 @@
             android:layout_marginHorizontal="@dimen/_20dp"
             android:layout_marginVertical="@dimen/_10dp"
             android:hint="@string/hint_username"
+            app:errorIconDrawable="@null"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -104,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:textColor="@color/primary_hint"
                 android:imeOptions="actionNext"
                 android:textCursorDrawable="@null"
@@ -120,6 +126,7 @@
             android:layout_marginHorizontal="@dimen/_20dp"
             android:layout_marginVertical="@dimen/_10dp"
             android:hint="@string/hint_a_short_bio"
+            app:errorIconDrawable="@null"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:lines="1"
                 android:maxLines="1"
                 android:textColor="@color/primary_hint"

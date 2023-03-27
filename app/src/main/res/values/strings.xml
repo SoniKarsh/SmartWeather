@@ -21,8 +21,16 @@
     <!--  Error  -->
     <string name="error_empty_email">The email can\'t be empty</string>
     <string name="error_empty_password">The password can\'t be empty</string>
+    <string name="error_empty_user_name">The username can\'t be empty</string>
+    <string name="error_empty_bio">The bio can\'t be empty</string>
+    <string name="error_empty_confirm_password">The confirm password can\'t be empty</string>
     <string name="error_not_valid_email">The email isn\'t valid</string>
+    <string name="error_not_valid_confirm_password">Confirm password should be same as password</string>
+    <string name="error_not_valid_profile">Please upload a profile picture</string>
     <string name="error_not_valid_password">
         Password must contain at least 6 characters, one uppercase, one lowercase letter with a digit and special symbol
     </string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="menu_more">More</string>
+    <string name="cta_log_out">Log out</string>
 </resources>

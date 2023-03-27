@@ -13,7 +13,16 @@
         >
         <action
             android:id="@+id/action_authFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_authFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -21,6 +30,13 @@
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_authFragment"
-            app:destination="@id/authFragment" />
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.technobugsai.smartweather.appview.profile.UserProfileFragment"
+        android:label="UserProfileFragment" />
 </navigation>

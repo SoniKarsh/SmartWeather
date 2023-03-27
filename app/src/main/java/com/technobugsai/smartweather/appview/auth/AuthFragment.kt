@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.technobugsai.smartweather.MainActivity
 import com.technobugsai.smartweather.appview.viewmodel.AuthViewModel
 import com.technobugsai.smartweather.databinding.FragmentAuthBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
+import com.technobugsai.smartweather.utils.KeyboardUtils
+import com.technobugsai.smartweather.utils.extensions.showSnack
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -32,36 +34,73 @@ class AuthFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
         observeErrors()
+        observeProgress()
+        showSnackBar()
+        observeLogin()
+    }
+
+    private fun observeLogin() {
+        lifecycleScope.launch {
+            viewModel.logInSuccess.collectLatest {
+                if (it) {
+                    findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToUserProfileFragment())
+                }
+            }
+        }
+    }
+
+    private fun showSnackBar() {
+        lifecycleScope.launch {
+            viewModel.snackBar.collectLatest {
+                if (it.isNotEmpty()) {
+                    requireView().showSnack(it)
+                }
+            }
+        }
+    }
+
+    private fun observeProgress(){
+        lifecycleScope.launch {
+            viewModel.progressBar.collectLatest {
+                (requireActivity() as MainActivity).showHideProgress(it)
+            }
+        }
     }
 
     private fun observeErrors() {
-        lifecycleScope.launch {
-            viewModel.run {
-                combine(emailError, pwdError) { email, pwd ->
-                    binding.run {
+        viewModel.run {
+            binding.run {
+                lifecycleScope.launch {
+                    emailError.collectLatest { email ->
                         if (email.isEmpty()) {
                             tilEmail.isErrorEnabled = false
                         } else {
-                            binding.tilEmail.error = email
+                            tilEmail.error = email
                         }
+                    }
+                }
+                lifecycleScope.launch {
+                    pwdError.collectLatest { pwd ->
                         if (pwd.isEmpty()) {
                             tilPassword.isErrorEnabled = false
                         } else {
-                            binding.tilPassword.error = pwd
+                            tilPassword.error = pwd
                         }
                     }
-                }.collectLatest { }
+                }
             }
         }
     }
 
     private fun setClickListeners() {
         binding.btnSignup.setOnClickListener {
+            KeyboardUtils.hideKeyboard(requireActivity())
             findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToSignUpFragment())
         }
         binding.btnLogin.setOnClickListener {
+            KeyboardUtils.hideKeyboard(requireActivity())
             binding.run {
-                viewModel.isValidationSuccessful(
+                viewModel.signInUser(
                     etEmail.text?.trim().toString(),
                     etPassword.text?.trim().toString()
                 )

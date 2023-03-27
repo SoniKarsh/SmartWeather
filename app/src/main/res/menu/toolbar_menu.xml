@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_lightbulb"
         app:showAsAction="always"
         android:title="@string/menu_ui_mode" />
+    <item android:id="@+id/menu_more"
+        android:title="@string/menu_more"
+        android:icon="@drawable/ic_more"
+        app:showAsAction="always"
+        />
 </menu>
